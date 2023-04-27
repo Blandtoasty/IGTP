@@ -37,7 +37,7 @@ func main() {
 			//Commands
 			if command == "buy" {
 				fmt.Println("What would you like to buy?")
-				fmt.Scan(buyRequest)
+				fmt.Scan(&buyRequest)
 				if buyRequest == "refined uranium" {
 					inventory = append(inventory, "Refined Uranium")
 					fmt.Println(inventory)
