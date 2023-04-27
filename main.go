@@ -10,7 +10,7 @@ func main() {
 	var inventory []string
 
 	fmt.Println("Welcome to the Intergalactic trading program")
-	fmt.Println(inventory)
+	fmt.Println("Once the prices appear, you can start playing, use 'help' to view commands")
 
 	var (
 		refinedUranium   int
@@ -19,7 +19,6 @@ func main() {
 		command          string
 	)
 
-	fmt.Scan(&command)
 	//Price loop
 	for range time.Tick(time.Second * 20) {
 
@@ -35,9 +34,10 @@ func main() {
 
 		for {
 			//Commands
+			fmt.Scan(&command)
 			if command == "buy" {
 				fmt.Println("What would you like to buy?")
-				fmt.Scan(buyRequest)
+				fmt.Scan(&buyRequest)
 				if buyRequest == "refined uranium" {
 					inventory = append(inventory, "Refined Uranium")
 					fmt.Println(inventory)
