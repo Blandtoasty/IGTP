@@ -3,12 +3,11 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"os"
 	"time"
 )
 
 func main() {
-	var inventory []string
-
 	fmt.Println("Welcome to the Intergalactic trading program")
 	fmt.Println("Once the prices appear, you can start playing, use 'help' to view commands")
 
@@ -28,23 +27,48 @@ func main() {
 
 		fmt.Printf("Refined Uranium: %v\nNatural Resources: %v\nStable Oganesson: %v\n//////////////////////////\n", refinedUranium, naturalResources, stableOganesson)
 
-		var (
-			buyRequest string
-		)
-
 		for {
+
+			var (
+				buyRequest string
+				inventory  []string
+			)
+
 			//Commands
 			fmt.Scan(&command)
+
 			if command == "buy" {
+
 				fmt.Println("What would you like to buy?")
 				fmt.Scan(&buyRequest)
-				if buyRequest == "refined uranium" {
+
+				if buyRequest == "refined" {
+
 					inventory = append(inventory, "Refined Uranium")
-					fmt.Println(inventory)
+					continue
+
 				}
+				continue
+
+			} else if command == "help" {
+
+				fmt.Println("'buy' Buy something\n'inventory' See your inventory")
+
+			} else if command == "inventory" {
+
+				fmt.Println(inventory)
+
+			} else if command == "exit" {
+
+				os.Exit(0)
+
+			} else if command == "prices" {
+
+				fmt.Printf("Refined Uranium: %v\nNatural Resources: %v\nStable Oganesson: %v\n//////////////////////////\n", refinedUranium, naturalResources, stableOganesson)
 
 			}
 		}
 
 	}
+
 }
