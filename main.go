@@ -4,71 +4,104 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
-	"time"
 )
 
 func main() {
 	fmt.Println("Welcome to the Intergalactic trading program")
-	fmt.Println("Once the prices appear, you can start playing, use 'help' to view commands")
+	fmt.Println("Use 'help' to view commands")
+	fmt.Println("Your starting money is 200,000")
+	fmt.Println("Start the game with 'change'")
 
 	var (
 		refinedUranium   int
 		naturalResources int
 		stableOganesson  int
 		command          string
+		buyRequest       string
+		inventory        []string
+		wallet           int
+		sellRequest      string
 	)
 
-	//Price loop
-	for range time.Tick(time.Second * 20) {
+	wallet = 200000
 
-		refinedUranium = rand.Intn(250000-100000) + 100000
-		naturalResources = rand.Intn(150000-1000) + 1000
-		stableOganesson = rand.Intn(500000-200000) + 100000
+	for {
+		//Commands
+		fmt.Scan(&command)
 
-		fmt.Printf("Refined Uranium: %v\nNatural Resources: %v\nStable Oganesson: %v\n//////////////////////////\n", refinedUranium, naturalResources, stableOganesson)
+		if command == "buy" {
 
-		for {
+			fmt.Println("What would you like to buy?")
+			fmt.Scan(&buyRequest)
 
-			var (
-				buyRequest string
-				inventory  []string
-			)
+			if buyRequest == "refined" {
 
-			//Commands
-			fmt.Scan(&command)
+				if wallet < refinedUranium {
+					fmt.Println("Sorry, you don't have enough money to buy that")
+				} else {
+					wallet = wallet - refinedUranium
+					inventory = append(inventory, "Refined Uranium,")
+				}
 
-			if command == "buy" {
+				continue
 
-				fmt.Println("What would you like to buy?")
-				fmt.Scan(&buyRequest)
+			} else if buyRequest == "natural" {
 
-				if buyRequest == "refined" {
+				if wallet < naturalResources {
+					fmt.Println("Sorry, you don't have enough money to buy that")
+				} else {
+					wallet = wallet - naturalResources
+					inventory = append(inventory, "Natural Resources,")
+				}
 
-					inventory = append(inventory, "Refined Uranium")
-					continue
+				continue
 
+			} else if buyRequest == "stable" {
+
+				if wallet < stableOganesson {
+					fmt.Println("Sorry, you don't have enough money to buy that")
+				} else {
+					wallet = wallet - stableOganesson
+					inventory = append(inventory, "Stable Oganesson,")
 				}
 				continue
 
-			} else if command == "help" {
+			}
+			continue
 
-				fmt.Println("'buy' Buy something\n'inventory' See your inventory")
+		} else if command == "help" {
 
-			} else if command == "inventory" {
+			fmt.Println("'buy' Buy something\n'inventory' See your inventory\n'exit' Exit the program\n'prices' Show the prices\n'change' Change the prices")
 
-				fmt.Println(inventory)
+		} else if command == "inventory" {
 
-			} else if command == "exit" {
+			fmt.Println(inventory)
 
-				os.Exit(0)
+		} else if command == "exit" {
 
-			} else if command == "prices" {
+			os.Exit(0)
 
-				fmt.Printf("Refined Uranium: %v\nNatural Resources: %v\nStable Oganesson: %v\n//////////////////////////\n", refinedUranium, naturalResources, stableOganesson)
+		} else if command == "prices" {
+
+			fmt.Printf("Refined Uranium: %v\nNatural Resources: %v\nStable Oganesson: %v\n//////////////////////////\n", refinedUranium, naturalResources, stableOganesson)
+
+		} else if command == "change" {
+			refinedUranium = rand.Intn(250000-100000) + 100000
+			naturalResources = rand.Intn(150000-1000) + 1000
+			stableOganesson = rand.Intn(500000-200000) + 100000
+
+			fmt.Printf("Refined Uranium: %v\nNatural Resources: %v\nStable Oganesson: %v\n//////////////////////////\n", refinedUranium, naturalResources, stableOganesson)
+		} else if command == "wallet" {
+			fmt.Println(wallet)
+		} else if command == "sell" {
+			fmt.Println("What would you like to sell?")
+			fmt.Scan(&sellRequest)
+
+			if sellRequest == "refined" {
 
 			}
-		}
 
+		}
 	}
 
 }
