@@ -13,19 +13,23 @@ func main() {
 	fmt.Println("Start the game with 'change'")
 
 	var (
-		refinedUranium   int
-		naturalResources int
-		stableOganesson  int
-		command          string
-		buyRequest       string
-		inventory        []string
-		wallet           int
-		sellRequest      string
+		refinedUranium    int
+		naturalResources  int
+		stableOganesson   int
+		command           string
+		buyRequest        string
+		inventory         []string
+		wallet            int
+		sellRequest       string
+		pRefinedUranium   int
+		pNaturalResources int
+		pStableOganesson  int
 	)
 
 	wallet = 200000
 
 	for {
+
 		//Commands
 		fmt.Scan(&command)
 
@@ -86,6 +90,11 @@ func main() {
 			fmt.Printf("Refined Uranium: %v\nNatural Resources: %v\nStable Oganesson: %v\n//////////////////////////\n", refinedUranium, naturalResources, stableOganesson)
 
 		} else if command == "change" {
+
+			pRefinedUranium = refinedUranium
+			pNaturalResources = naturalResources
+			pStableOganesson = stableOganesson
+
 			refinedUranium = rand.Intn(250000-100000) + 100000
 			naturalResources = rand.Intn(150000-1000) + 1000
 			stableOganesson = rand.Intn(500000-200000) + 100000
@@ -101,6 +110,8 @@ func main() {
 
 			}
 
+		} else if command == "past" {
+			fmt.Printf("The past prices are:\nRefined uranium: %v\nNatural resources: %v\nStable oganesson: %v\n", pRefinedUranium, pNaturalResources, pStableOganesson)
 		}
 	}
 
