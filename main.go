@@ -75,7 +75,7 @@ func main() {
 
 		} else if command == "help" {
 
-			fmt.Println("'buy' Buy something\n'inventory' See your inventory\n'exit' Exit the program\n'prices' Show the prices\n'change' Change the prices")
+			fmt.Println("'buy' Buy something\n'inventory' See your inventory\n'exit' Exit the program\n'prices' Show the prices\n'change' Change the prices\n'wallet' Show how much money you have\n'sell' Sell something\n'past' Show the past prices")
 
 		} else if command == "inventory" {
 
