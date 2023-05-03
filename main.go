@@ -11,6 +11,7 @@ func main() {
 	fmt.Println("Use 'help' to view commands")
 	fmt.Println("Your starting money is 200,000")
 	fmt.Println("Start the game with 'change'")
+	fmt.Println("The prices also show if it is an increase compared to the last prices and if it's affordable (A) or too expensive (TE)")
 
 	var (
 		refinedUranium    int
@@ -27,6 +28,9 @@ func main() {
 		plusOrMinR        string
 		plusOrMinN        string
 		plusOrMinO        string
+		aOrNoR            string
+		aOrNoN            string
+		aOrNoO            string
 	)
 
 	wallet = 200000
@@ -90,7 +94,7 @@ func main() {
 
 		} else if command == "prices" {
 
-			fmt.Printf("Refined Uranium: %v(%v)\nNatural Resources: %v(%v)\nStable Oganesson: %v(%v)\n//////////////////////////\n", refinedUranium, plusOrMinR, naturalResources, plusOrMinN, stableOganesson, plusOrMinO)
+			fmt.Printf("Refined Uranium: %v(%v, %v)\nNatural Resources: %v(%v, %v)\nStable Oganesson: %v(%v, %v)\n//////////////////////////\n", refinedUranium, plusOrMinR, aOrNoR, naturalResources, plusOrMinN, aOrNoN, stableOganesson, plusOrMinO, aOrNoO)
 
 		} else if command == "change" {
 
@@ -119,7 +123,26 @@ func main() {
 				plusOrMinO = "-"
 			}
 
-			fmt.Printf("Refined Uranium: %v(%v)\nNatural Resources: %v(%v)\nStable Oganesson: %v(%v)\n//////////////////////////\n", refinedUranium, plusOrMinR, naturalResources, plusOrMinN, stableOganesson, plusOrMinO)
+			if wallet >= refinedUranium {
+				aOrNoR = "A"
+			} else if wallet <= refinedUranium {
+				aOrNoR = "TE"
+			}
+
+			if wallet >= naturalResources {
+				aOrNoN = "A"
+			} else if wallet <= naturalResources {
+				aOrNoN = "TE"
+			}
+
+			if wallet >= stableOganesson {
+				aOrNoO = "A"
+			} else if wallet <= stableOganesson {
+				aOrNoO = "TE"
+			}
+
+			fmt.Printf("Refined Uranium: %v(%v, %v)\nNatural Resources: %v(%v, %v)\nStable Oganesson: %v(%v, %v)\n//////////////////////////\n", refinedUranium, plusOrMinR, aOrNoR, naturalResources, plusOrMinN, aOrNoN, stableOganesson, plusOrMinO, aOrNoO)
+
 		} else if command == "wallet" {
 			fmt.Println(wallet)
 		} else if command == "sell" {
