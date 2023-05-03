@@ -107,7 +107,6 @@ func main() {
 			} else if refinedUranium < pRefinedUranium {
 				plusOrMinR = "-"
 			}
-
 			if naturalResources > pNaturalResources {
 				plusOrMinN = "+"
 			} else if naturalResources < pNaturalResources {
@@ -129,34 +128,45 @@ func main() {
 
 			if sellRequest == "refined" {
 
-				wallet = wallet + refinedUranium
+				if wallet >= refinedUranium {
+					wallet = wallet + refinedUranium
 
-				for i, v := range inventory {
-					if v == "refined uranium," {
-						inventory = append(inventory[:i], inventory[i+1:]...)
-						break
+					for i, v := range inventory {
+						if v == "refined uranium," {
+							inventory = append(inventory[:i], inventory[i+1:]...)
+							break
+						}
 					}
+				} else {
+					fmt.Println("You don't have enough money to but that")
 				}
 			} else if sellRequest == "natural" {
 
-				wallet = wallet + naturalResources
+				if wallet >= naturalResources {
+					wallet = wallet + naturalResources
 
-				for i, v := range inventory {
-					if v == "natural resources," {
-						inventory = append(inventory[:i], inventory[i+1:]...)
-						break
+					for i, v := range inventory {
+						if v == "natural resources," {
+							inventory = append(inventory[:i], inventory[i+1:]...)
+							break
+						}
 					}
 				}
+
 			} else if sellRequest == "stable" {
 
-				wallet = wallet + stableOganesson
+				if wallet >= stableOganesson {
 
-				for i, v := range inventory {
-					if v == "stable oganesson," {
-						inventory = append(inventory[:i], inventory[i+1:]...)
-						break
+					wallet = wallet + stableOganesson
+
+					for i, v := range inventory {
+						if v == "stable oganesson," {
+							inventory = append(inventory[:i], inventory[i+1:]...)
+							break
+						}
 					}
 				}
+
 			}
 		} else if command == "past" {
 			fmt.Printf("The past prices are:\nRefined uranium: %v\nNatural resources: %v\nStable oganesson: %v\n", pRefinedUranium, pNaturalResources, pStableOganesson)
