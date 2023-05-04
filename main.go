@@ -77,6 +77,8 @@ func main() {
 				}
 				continue
 
+			} else {
+				fmt.Println("What you typed is not correct")
 			}
 			continue
 
@@ -190,9 +192,13 @@ func main() {
 					}
 				}
 
+			} else {
+				fmt.Println("What you typed is not correct")
 			}
 		} else if command == "past" {
 			fmt.Printf("The past prices are:\nRefined uranium: %v\nNatural resources: %v\nStable oganesson: %v\n", pRefinedUranium, pNaturalResources, pStableOganesson)
+		} else {
+			fmt.Println("What you typed is not correct")
 		}
 	}
 
