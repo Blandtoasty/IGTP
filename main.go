@@ -143,7 +143,7 @@ func main() {
 				aOrNoO = "TE"
 			}
 
-			fmt.Printf("Refined Uranium: %v(%v, %v)\nNatural Resources: %v(%v, %v)\nStable Oganesson: %v(%v, %v)\n//////////////////////////\n", refinedUranium, plusOrMinR, aOrNoR, naturalResources, plusOrMinN, aOrNoN, stableOganesson, plusOrMinO, aOrNoO)
+			fmt.Printf("//////////////////////////\nRefined Uranium: %v(%v, %v)\nNatural Resources: %v(%v, %v)\nStable Oganesson: %v(%v, %v)\n//////////////////////////\n", refinedUranium, plusOrMinR, aOrNoR, naturalResources, plusOrMinN, aOrNoN, stableOganesson, plusOrMinO, aOrNoO)
 
 		} else if command == "wallet" {
 			fmt.Println(wallet)
@@ -153,42 +153,31 @@ func main() {
 
 			if sellRequest == "refined" {
 
-				if wallet >= refinedUranium {
-					wallet = wallet + refinedUranium
-
-					for i, v := range inventory {
-						if v == "refined uranium," {
-							inventory = append(inventory[:i], inventory[i+1:]...)
-							break
-						}
+				for i, v := range inventory {
+					if v == "refined uranium," {
+						inventory = append(inventory[:i], inventory[i+1:]...)
+						wallet = wallet + refinedUranium
+						break
 					}
-				} else {
-					fmt.Println("You don't have enough money to but that")
 				}
+
 			} else if sellRequest == "natural" {
 
-				if wallet >= naturalResources {
-					wallet = wallet + naturalResources
-
-					for i, v := range inventory {
-						if v == "natural resources," {
-							inventory = append(inventory[:i], inventory[i+1:]...)
-							break
-						}
+				for i, v := range inventory {
+					if v == "natural resources," {
+						inventory = append(inventory[:i], inventory[i+1:]...)
+						wallet = wallet + naturalResources
+						break
 					}
 				}
 
 			} else if sellRequest == "stable" {
 
-				if wallet >= stableOganesson {
-
-					wallet = wallet + stableOganesson
-
-					for i, v := range inventory {
-						if v == "stable oganesson," {
-							inventory = append(inventory[:i], inventory[i+1:]...)
-							break
-						}
+				for i, v := range inventory {
+					if v == "stable oganesson," {
+						inventory = append(inventory[:i], inventory[i+1:]...)
+						wallet = wallet + stableOganesson
+						break
 					}
 				}
 
